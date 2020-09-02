@@ -1,12 +1,13 @@
 package com.example.controller;
 
 
+import com.example.entity.SysUser;
+import com.example.service.SysUserService;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author:0xOO
@@ -19,10 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private SysUserService userService;
 
-    @RequestMapping("getUser/{id}")
-    public String GetUser(@PathVariable int id){
-        return userService.Sel(id).toString();
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    public SysUser getUser(Integer id){
+        SysUser sysUser = userService.selectById(id);
+        return sysUser;
     }
 }

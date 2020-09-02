@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.example.entity.SysUser" >
+        <id column="id" property="id"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <delete id="deleteById" parameterType="int">
+        delete from sys_user where id =#{id}
+
+    </delete>
+    <!--增加用户信息-->
+    <insert id="save" parameterType="com.example.entity.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userName != null" >
+                name,
+            </if>
+            <if test="password != null" >
+                passWord
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix= ") " suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{passWord,jdbcType=VARCHAR}
+            </if>
+        </trim>
+
+    </insert>
+
+    <!--根据id变更用户信息-->
+    <update id="updateById" parameterType="com.example.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="name !=null">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="passWord != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id ,jdbcType=INTEGER}
+
+    </update>
+
+
+</mapper>

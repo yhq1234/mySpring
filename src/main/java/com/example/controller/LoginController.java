@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.SysUser;
 import com.example.service.SysUserService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class LoginController {
 
         return "home";
     }
+    @ApiOperation(value="用户登录", notes="")
     @RequestMapping("/login")
     public String showLogin(String username,  String password, Map<String,Object> map,
                             HttpSession session) {
@@ -57,6 +59,7 @@ public class LoginController {
 
     @RequestMapping("/admin")
     @ResponseBody
+    @ApiOperation(value = "返回首页",notes ="根据url的id来获取用户详细信息" )
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String printAdmin(){
         return "如果你看见这句话，说明你有ROLE_ADMIN角色";

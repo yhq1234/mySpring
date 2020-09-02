@@ -5,6 +5,7 @@ spring:
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+
   thymeleaf:
     suffix: .html
     check-template-location: true
@@ -23,17 +24,17 @@ spring:
   #    publisher-returns: true
   resources:
     static-locations: classpath:/static/,classpath:/view/,classpath:/public,classpath:/resources/
-#    pagehelper.helper-dialect=mysql
-#    pagehelper.params=count=countSql
-#    pagehelper.reasonable=true
-#    pagehelper.support-methods-arguments=true
-pagehelper:
-  helper-dialect: mysql
-  params: params=count=countSql
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
   reasonable: true
   support-methods-arguments: true
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.entity
   configuration:
     map-underscore-to-camel-case: true

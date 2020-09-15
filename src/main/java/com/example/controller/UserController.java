@@ -27,4 +27,11 @@ public class UserController {
         SysUser sysUser = userService.selectById(id);
         return sysUser;
     }
+
+    @RequestMapping("/save")
+    public String saveUser(Integer id){
+        userService.updateById(id);
+        return "success";
+
+    }
 }

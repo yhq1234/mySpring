@@ -34,7 +34,7 @@ public class SysUserService {
      */
 
     @CachePut(cacheNames= "sysUser",key = "#id")
-    public Integer updateById (int id){
+    public Integer updateById (Integer id){
         userMapper.updateById(id);
         return null;
     }

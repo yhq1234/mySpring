@@ -1,8 +1,10 @@
 package com.example;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan("com.example.mapper") //扫描的mapper
 @SpringBootApplication
 @EnableScheduling   //要加上开启定时任务的注解
+@EnableCaching  //开启缓存
 public class DemoApplication {
 
 	public static void main(String[] args) {
@@ -52,6 +55,10 @@ public class DemoApplication {
 					// 描述
 					.description("API 描述")
 					.build();
+		}
+		@Bean
+		public Queue helloQueue() {
+			return new Queue("helloQueue");
 		}
 	}
 }
